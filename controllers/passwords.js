@@ -1,50 +1,96 @@
+const Password = require('../models/Password');
+const ErrorResponse = require('../utils/errorResponse');
 
 // @desc    Get all passwords
 // @route   GET /api/v1/passwords
 // @access  Private
-exports.getPasswords = (req, res, next) => {
-  res.status(200).json( {
+exports.getPasswords = async (req, res, next) => {
+  const passwords = await Password.find();
+
+  res.status(200).json({
     success: true,
-    msg: 'Show all passwords'
-  });
+    count: passwords.length,
+    data: passwords
+  })
 };
 
 // @desc    Get single password
 // @route   GET /api/v1/passwords/:id
 // @access  Private
-exports.getPassword = (req, res, next) => {
-  res.status(200).json( {
-    success: true,
-    msg: `Show password ${req.params.id}`
-  });
+exports.getPassword = async (req, res, next) => {
+  try { 
+    const password = await Password.findById(req.params.id);
+    
+    if(!password) {
+      return next(
+        new ErrorResponse(`Password not found with id of ${req.params.id}`, 404)
+      );
+    }
+
+    res.status(200).json( {
+      success: true,
+      data: password
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 // @desc    Create password
 // @route   POST /api/v1/passwords
 // @access  Private
-exports.createPassword = (req, res, next) => {
-  res.status(200).json( {
+exports.createPassword = async (req, res, next) => {
+  const password = await Password.create(req.body);
+
+  res.status(201).json({
     success: true,
-    msg: 'Create password'
+    data: password
   });
 };
 
 // @desc    Update password
 // @route   PUT /api/v1/passwords/:id
 // @access  Private
-exports.updatePassword = (req, res, next) => {
-  res.status(200).json( {
-    success: true,
-    msg: `Update password ${req.params.id}`
-  });
-};
+exports.updatePassword = async (req, res, next) => {
+  try { 
+    const password = await Password.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
+
+    if(!password) {
+      return next(
+        new ErrorResponse(`Password not found with id of ${req.params.id}`, 404)
+      );
+    }
+
+    res.status(200).json({ 
+      success: true,
+      data: password
+    });
+  } catch (err) {
+    next(err);
+  }
+  };
 
 // @desc    Delete password
 // @route   DELETE /api/v1/passwords/:id
 // @access  Private
-exports.deletePassword = (req, res, next) => {
-  res.status(200).json( {
-    success: true,
-    msg: `Delete password ${req.params.id}`
-  });
+exports.deletePassword = async (req, res, next) => {
+  try {
+    const password = await Password.findByIdAndDelete(req.params.id);
+
+    if(!password) {
+      return next(
+        new ErrorResponse(`Password not found with id of ${req.params.id}`, 404)
+      );
+    };
+
+    res.status(200).json({ 
+      success: true,
+      data: {}
+    });
+  } catch (err) {
+    next(err);
+  }
 };

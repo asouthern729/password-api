@@ -1,0 +1,36 @@
+[{
+  "name": "MissionSquare",
+  "website": "https://accountaccess.icmarc.org/login.jsp",
+  "username": "asouthern729",
+  "password": "Dominoe123",
+  "comments": "401K retirement plan"
+},
+{
+  "name": "Granicus",
+  "website": "https://www.franklintn.gov/Admin/LogOn?ReturnUrl=%2fadmin%2fComponents",
+  "username": "andrew.southern",
+  "password": "Dominoe123!",
+  "comments": "City of Franklin website editor"
+},
+{
+  "name": "Gmail",
+  "website": "https://www.gmail.com",
+  "username": "ffdnearmap@gmail.com",
+  "password": "Viewonly00",
+  "comments": "Gmail account for FFD nearmap account"
+},
+{
+  "name": "Digital Ocean",
+  "website": "https://www.digitalocean.com/",
+  "username": "asouthern729",
+  "password": "DominoeE123!A",
+  "comments": "Digital Ocean cloud computing service"
+},
+{
+  "name": "Nearmap",
+  "website": "https://admin.nearmap.com/api/identityserver/v1/login?signin=ae239ed2884b970232ec48b049e337b3",
+  "username": "andrew.southern@franklintn.gov",
+  "password": "Dominoe123!",
+  "comments": "Aerial imagery service"
+}
+]

@@ -10,8 +10,11 @@
   "author": "Andrew Southern",
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.4.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "git": "^0.1.5",
+    "mongoose": "^6.0.13",
     "morgan": "^1.10.0"
   },
   "devDependencies": {

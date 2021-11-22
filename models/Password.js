@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
+const bcrypt = require('bcryptjs');
 
 const PasswordSchema = new mongoose.Schema({
   name: {
@@ -33,6 +35,20 @@ const PasswordSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+});
+
+// Encrypt password using bcrypt
+PasswordSchema.pre('save', async function(next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+// Create password slug from the name
+PasswordSchema.pre('save', function(next) {
+  this.slug = slugify(this.name, {
+    lower: true
+  });
+  next();npm
 });
 
 module.exports = mongoose.model('Password', PasswordSchema);

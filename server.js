@@ -13,6 +13,7 @@ connectDB();
 
 // Route files
 const passwords = require('./routes/passwords');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -26,6 +27,7 @@ if(process.env.NODE_ENV === 'development') {
 
 // Mount routers
 app.use('/api/v1/passwords', passwords);
+app.use('/api/v1/auth', auth);
 
 app.use(errorHandler);
 

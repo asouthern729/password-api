@@ -1,6 +1,7 @@
 const Password = require('../models/Password');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
+const bcrypt = require('bcryptjs');
 
 // @desc    Get all passwords
 // @route   GET /api/v1/passwords
@@ -10,6 +11,9 @@ exports.getPasswords = asyncHandler(async (req, res, next) => {
 
   // Copy req.query
   const reqQuery = { ...req.query };
+
+  // Add user to reqQuery
+  reqQuery.user = req.user;
 
   // Field to exclude
   const removeFields = ['select', 'page', 'limit'];
@@ -85,8 +89,13 @@ exports.getPassword = asyncHandler(async (req, res, next) => {
   
   if(!password) {
     return next(
-      new ErrorResponse(`Password not found with id of ${req.params.id}`, 404)
+      new ErrorResponse(`Resource not found with id of ${req.params.id}`, 404)
     );
+  }
+
+  // Make sure password belongs to currently logged in user or admin
+  if(password.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(new ErrorResponse('Not authorized to view this resource', 401))
   }
 
   res.status(200).json( {
@@ -99,32 +108,42 @@ exports.getPassword = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/passwords
 // @access  Private
 exports.createPassword = async (req, res, next) => {
-  try { 
-    const password = await Password.create(req.body);
+  // Add user to req.body
+  req.body.user = req.user.id;
 
-    res.status(201).json({
-      success: true,
-      data: password
-    })
-  } catch (err) {
-    next(err);
-  }
+  const password = await Password.create(req.body);
+
+  res.status(201).json({
+    success: true,
+    data: password
+  });
 }
 
 // @desc    Update password
 // @route   PUT /api/v1/passwords/:id
 // @access  Private
 exports.updatePassword = asyncHandler(async (req, res, next) => {
-  const password = await Password.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+  let password = await Password.findById(req.params.id);
 
   if(!password) {
     return next(
-      new ErrorResponse(`Password not found with id of ${req.params.id}`, 404)
+      new ErrorResponse(`Resource not found with id of ${req.params.id}`, 404)
     );
   }
+
+  // Make sure password belongs to currently logged in user or admin
+  if(password.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(new ErrorResponse('Not authorized to edit this resource', 401))
+  }
+
+  if(req.body.password) {
+    req.body.password = await bcrypt.hash(req.body.password, 10);
+  }
+
+  password = await Password.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
 
   res.status(200).json({ 
     success: true,
@@ -136,13 +155,20 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/v1/passwords/:id
 // @access  Private
 exports.deletePassword = asyncHandler(async (req, res, next) => {
-  const password = await Password.findByIdAndDelete(req.params.id);
+  const password = await Password.findById(req.params.id);
 
   if(!password) {
     return next(
-      new ErrorResponse(`Password not found with id of ${req.params.id}`, 404)
+      new ErrorResponse(`Resource not found with id of ${req.params.id}`, 404)
     );
   };
+
+  // Make sure password belongs to currently logged in user or admin
+  if(password.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(new ErrorResponse('Not authorized to delete this resource', 401))
+  }
+
+  await password.remove();
 
   res.status(200).json({ 
     success: true,

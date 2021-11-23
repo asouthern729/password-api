@@ -8,6 +8,7 @@ dotenv.config({ path: './config/config.env' });
 
 // Load models
 const Password = require('./models/Password');
+const User = require('./models/User');
 
 // Connect to database
 mongoose.connect(process.env.MONGO_URI, {
@@ -17,11 +18,13 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Read JSON files
 const passwords = JSON.parse(fs.readFileSync(`${__dirname}/_data/pass.json`, 'utf-8'));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8'))
 
 // Import into database
 const importData = async () => {
   try {
     await Password.create(passwords);
+    await User.create(users);
 
     console.log('Data Imported...'.green.inverse);
     process.exit();
@@ -34,6 +37,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Password.deleteMany();
+    await User.deleteMany();
 
     console.log('Data Detroyed...'.red.inverse);
     process.exit();

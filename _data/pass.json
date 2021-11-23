@@ -3,34 +3,39 @@
   "website": "https://accountaccess.icmarc.org/login.jsp",
   "username": "asouthern729",
   "password": "Dominoe123",
-  "comments": "401K retirement plan"
+  "comments": "401K retirement plan",
+  "user": "619bd5edba7b5f8722a5f17f"
 },
 {
   "name": "Granicus",
   "website": "https://www.franklintn.gov/Admin/LogOn?ReturnUrl=%2fadmin%2fComponents",
   "username": "andrew.southern",
   "password": "Dominoe123!",
-  "comments": "City of Franklin website editor"
+  "comments": "City of Franklin website editor",
+  "user": "619bd5edba7b5f8722a5f17f"
 },
 {
   "name": "Gmail",
   "website": "https://www.gmail.com",
   "username": "ffdnearmap@gmail.com",
   "password": "Viewonly00",
-  "comments": "Gmail account for FFD nearmap account"
+  "comments": "Gmail account for FFD nearmap account",
+  "user": "619bd5edba7b5f8722a5f17f"
 },
 {
   "name": "Digital Ocean",
   "website": "https://www.digitalocean.com/",
   "username": "asouthern729",
   "password": "DominoeE123!A",
-  "comments": "Digital Ocean cloud computing service"
+  "comments": "Digital Ocean cloud computing service",
+  "user": "619bd5edba7b5f8722a5f17f"
 },
 {
   "name": "Nearmap",
   "website": "https://admin.nearmap.com/api/identityserver/v1/login?signin=ae239ed2884b970232ec48b049e337b3",
   "username": "andrew.southern@franklintn.gov",
   "password": "Dominoe123!",
-  "comments": "Aerial imagery service"
+  "comments": "Aerial imagery service",
+  "user": "619bd5edba7b5f8722a5f17f"
 }
 ]

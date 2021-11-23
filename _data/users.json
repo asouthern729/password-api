@@ -1,0 +1,30 @@
+[
+  {
+    "_id": "619bd5edba7b5f8722a5f17f",
+    "name": "Andrew Southern",
+    "email": "andrewsouthern729@gmail.com",
+    "role": "user",
+    "password": "Dominoe123!"
+  },
+  {
+    "_id": "619bf59ed6d88993fa7b7ce4",
+    "name": "Ginny Southern",
+    "email": "ginnysouthern@gmail.com",
+    "role": "user",
+    "password": "Dolly123!"
+  },
+  {
+    "_id": "619c0e734797b06644394ac6",
+    "name": "Adaline Southern",
+    "email": "adalinesouthern@gmail.com",
+    "role": "user",
+    "password": "Turko123!"
+  },
+  {
+    "_id": "619c17915ff56e05cc21b491",
+    "name": "Angela Kortas",
+    "email": "angelakortas@gmail.com",
+    "role": "user",
+    "password": "Layla123!"
+  }
+]

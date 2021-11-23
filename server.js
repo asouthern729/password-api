@@ -3,6 +3,12 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const cors = require('cors');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
@@ -15,6 +21,7 @@ connectDB();
 // Route files
 const passwords = require('./routes/passwords');
 const auth = require('./routes/auth');
+const users = require('./routes/users');
 
 const app = express();
 
@@ -29,9 +36,33 @@ if(process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 };
 
+// Sanitize data
+app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet());
+
+// Prevent xss attacks
+app.use(xss());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10mins
+  max: 100
+});
+
+app.use(limiter);
+
+// Prevent http param pollution
+app.use(hpp());
+
+// Enable cors
+app.use(cors());
+
 // Mount routers
 app.use('/api/v1/passwords', passwords);
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/users', users);
 
 app.use(errorHandler);
 

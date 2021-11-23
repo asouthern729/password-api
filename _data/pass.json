@@ -1,41 +1,41 @@
 [{
-  "name": "MissionSquare",
-  "website": "https://accountaccess.icmarc.org/login.jsp",
-  "username": "asouthern729",
-  "password": "Dominoe123",
-  "comments": "401K retirement plan",
+  "name": "Bobby's Website",
+  "website": "https://www.bobbys-website.com",
+  "username": "bobbygreene",
+  "password": "Password123!",
+  "comments": "Bobby Green's Website",
   "user": "619bd5edba7b5f8722a5f17f"
 },
 {
-  "name": "Granicus",
-  "website": "https://www.franklintn.gov/Admin/LogOn?ReturnUrl=%2fadmin%2fComponents",
-  "username": "andrew.southern",
-  "password": "Dominoe123!",
-  "comments": "City of Franklin website editor",
-  "user": "619bd5edba7b5f8722a5f17f"
+  "name": "Michael's Website",
+  "website": "https://www.michaels-website.com",
+  "username": "michaelspradlin",
+  "password": "Password123!",
+  "comments": "Michael Spradlin's Website",
+  "user": "619bf59ed6d88993fa7b7ce4"
 },
 {
-  "name": "Gmail",
-  "website": "https://www.gmail.com",
-  "username": "ffdnearmap@gmail.com",
-  "password": "Viewonly00",
-  "comments": "Gmail account for FFD nearmap account",
-  "user": "619bd5edba7b5f8722a5f17f"
+  "name": "Albert's Website",
+  "website": "https://www.alberts-website.com",
+  "username": "albertleighton",
+  "password": "Password123!",
+  "comments": "Albert's Website",
+  "user": "619c0e734797b06644394ac6"
 },
 {
-  "name": "Digital Ocean",
-  "website": "https://www.digitalocean.com/",
-  "username": "asouthern729",
-  "password": "DominoeE123!A",
-  "comments": "Digital Ocean cloud computing service",
-  "user": "619bd5edba7b5f8722a5f17f"
+  "name": "Remona's Website",
+  "website": "https://www.remonas-website.com/",
+  "username": "remonayoung",
+  "password": "Password123!",
+  "comments": "Remona's Website",
+  "user": "619c17915ff56e05cc21b491"
 },
 {
-  "name": "Nearmap",
-  "website": "https://admin.nearmap.com/api/identityserver/v1/login?signin=ae239ed2884b970232ec48b049e337b3",
-  "username": "andrew.southern@franklintn.gov",
-  "password": "Dominoe123!",
-  "comments": "Aerial imagery service",
+  "name": "Bobby's Other Website",
+  "website": "https://www.bobbys-other-website.com",
+  "username": "bobbygreene",
+  "password": "Password123!",
+  "comments": "Bobby's Other Website",
   "user": "619bd5edba7b5f8722a5f17f"
 }
 ]

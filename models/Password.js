@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const bcrypt = require('bcryptjs');
+const { encrypt } = require('../utils/crypto');
 
 const PasswordSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please add a name'],
-    unique: true,
     trim: true,
     maxlength: [50, 'Name can not be more than 50 characters']
   },
@@ -42,11 +42,10 @@ const PasswordSchema = new mongoose.Schema({
   }
 });
 
-// Encrypt password using bcrypt
+// Encrypt password using crypto module
 PasswordSchema.pre('save', async function(next) {
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
+  this.password = await encrypt(this.password);
+})
 
 // Create password slug from the name
 PasswordSchema.pre('save', function(next) {

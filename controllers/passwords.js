@@ -1,7 +1,7 @@
 const Password = require('../models/Password');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
-const bcrypt = require('bcryptjs');
+const { encrypt } = require('../utils/crypto');
 
 // @desc    Get all passwords
 // @route   GET /api/v1/passwords
@@ -136,8 +136,11 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Not authorized to edit this resource', 401))
   }
 
+  // Encrypt password if found in req.body
   if(req.body.password) {
-    req.body.password = await bcrypt.hash(req.body.password, 10);
+    let hash;
+    hash = await encrypt(req.body.password);
+    req.body.password = hash;
   }
 
   password = await Password.findByIdAndUpdate(req.params.id, req.body, {
